@@ -1,0 +1,35 @@
+<%= form_with(model: profile, local: true, :html => {:id => "profileForm"})  do |form| %>
+    
+    <% if profile.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+        <ul>
+          <% profile.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %> 
+    <div class="form-group">
+      <label for="first_name"> First Name : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :first_name, :class => 'form-control', :id => 'first-name-field', :onkeyup => "validate_first_name();" %>
+        </div>
+      <span id="firstNameError"></span>
+    </div>
+    <div class="form-group">
+      <label for="last_name"> Last Name : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :last_name, :class => 'form-control', :id => 'last-name-field', :onkeyup => "validate_last_name();" %>
+        </div>
+      <span id="lastNameError"></span>
+    </div>
+
+    <div class="actions">
+    <%= form.submit class: 'btn submit-btn',id: "submitProfile", :onclick => "check_blank();"  %>
+    <%= link_to 'Back', root_path, :class => 'btn back-btn '%>
+  </div>
+<% end %>
+</div>

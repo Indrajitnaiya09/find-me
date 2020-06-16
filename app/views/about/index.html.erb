@@ -1,1 +1,5 @@
-<H2>Hello World</H2
+  
+<H2> List of all User </H2>
+<% @users.each do |user| %>
+  <%= user.email %> </br>
+<% end %>

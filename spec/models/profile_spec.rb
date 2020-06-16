@@ -6,14 +6,14 @@ RSpec.describe Profile, type: :model do
   end
   
   describe '#new' do
-    it 'should initialize a customer with valid attributes' do
+    it 'should initialize a profile with valid attributes' do
       expect(@profile.first_name).to eq('Indrajit')
       expect(@profile.last_name).to eq('Naiya')
     end
   end
 
   describe '#create' do
-    it 'should create a collection with valid attributes' do
+    it 'should create a profile with valid attributes' do
       expect(@profile.first_name).to eq('Indrajit')
       expect(@profile.last_name).to eq('Naiya')
     end

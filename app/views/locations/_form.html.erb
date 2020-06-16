@@ -1,0 +1,67 @@
+<%= form_with(model: location, local: true, :html => {:id => "locationForm"})  do |form| %>
+    
+    <% if location.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+        <ul>
+          <% location.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %> 
+    <div class="form-group">
+      <label for="latitude"> Latitude : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :latitude, :class => 'form-control', :id => 'latitude-field', :onkeyup => "validate_latitude();" %>
+        </div>
+      <span id="areaError"></span>
+    </div>
+    <div class="form-group">
+      <label for="longitude">  Longitude : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :longitude, :class => 'form-control', :id => 'longitude-field', :onkeyup => "validate_longitude();" %>
+        </div>
+      <span id="longitudeError"></span>
+    </div>
+
+    <% @users.each do |user| %>
+      <div class="field">
+      <label class="form-label"><%= check_box_tag "user_ids[]", user.id, :id => "user_ids_#{user.id}" %><%= user.email %></label>
+    </div>
+    <% end %>
+
+    
+
+    <div class="actions">
+    <%= form.submit class: 'btn submit-btn',id: "submitAddress", :onclick => "check_blank();"  %>
+    <%= link_to 'Back', root_path, :class => 'btn back-btn '%>
+  </div>
+<% end %>
+</div>
+
+<script type="text/javascript">
+window.onload = init;
+function init(){
+var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([0,0]),
+          zoom: 1 //Initial Zoom Level
+        })
+        
+      });
+      map.on('click', function(e){
+            console.log(e.coordinate);
+            document.getElementById('latitude-field').value = e.coordinate[0];
+            document.getElementById('longitude-field').value = e.coordinate[1];
+        })
+    }
+</script>

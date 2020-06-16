@@ -1,0 +1,62 @@
+<%= form_with(model: address, local: true, :html => {:id => "addressForm"})  do |form| %>
+    
+    <% if address.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>
+        <ul>
+          <% address.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %> 
+    <div class="form-group">
+      <label for="area"> Area : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :area, :class => 'form-control', :id => 'area-field', :onkeyup => "validate_area();" %>
+        </div>
+      <span id="areaError"></span>
+    </div>
+    <div class="form-group">
+      <label for="landmark">  Landmark : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :landmark, :class => 'form-control', :id => 'landmark-field', :onkeyup => "validate_landmark();" %>
+        </div>
+      <span id="landmarkError"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="city">  City : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :city, :class => 'form-control', :id => 'city-field', :onkeyup => "validate_landmark();" %>
+        </div>
+      <span id="cityError"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="state">  State : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :state, :class => 'form-control', :id => 'state-field', :onkeyup => "validate_state();" %>
+        </div>
+      <span id="stateError"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="country">  Country : </label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <%= form.text_field :country, :class => 'form-control', :id => 'country-field', :onkeyup => "validate_country();" %>
+        </div>
+      <span id="countryError"></span>
+    </div>
+
+    <div class="actions">
+    <%= form.submit class: 'btn submit-btn',id: "submitAddress", :onclick => "check_blank();"  %>
+    <%= link_to 'Back', root_path, :class => 'btn back-btn '%>
+  </div>
+<% end %>
+</div>

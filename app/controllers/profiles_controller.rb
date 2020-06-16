@@ -5,13 +5,16 @@ class ProfilesController < ApplicationController
         @profile = current_user.profile
     end
 
+    def show
+        @profile = Profile.find_by(:id=> params[:id])
+    end
+
     def new
+        @profile = Profile.new
     end
     
     def edit
-    end
-
-    def show
+        @profile = Profile.find_by(:id=> params[:id])
     end
 
     def create
@@ -25,6 +28,7 @@ class ProfilesController < ApplicationController
     end
 
     def update
+        @profile = Profile.find_by(:id=> params[:id])
         if @profile.update(profile_params)
             flash[:success] = "Profile #{@profile.first_name} is successfully updated."
             redirect_to profile_path(@profile)
